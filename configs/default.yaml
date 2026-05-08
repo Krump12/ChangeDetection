@@ -1,0 +1,48 @@
+# Default configuration for local remote sensing change detection.
+data:
+  image_size: [256, 256]  # [width, height]
+  train_a_dir: data/train/A
+  train_b_dir: data/train/B
+  train_label_dir: data/train/label
+  val_a_dir: data/val/A
+  val_b_dir: data/val/B
+  val_label_dir: data/val/label
+  test_a_dir: data/test/A
+  test_b_dir: data/test/B
+
+outputs:
+  checkpoint_dir: outputs/checkpoints
+  best_checkpoint: outputs/checkpoints/best_model.pth
+  predict_output_dir: outputs/predict_masks
+  val_preview_dir: outputs/val_preview_masks
+
+train:
+  batch_size: 16
+  epochs: 100
+  learning_rate: 0.0003
+  num_workers: 0
+  seed: 42
+  device: auto
+
+model:
+  in_channels: 3
+  base_channels: 16
+
+loss:
+  bce_weight: 0.5
+  dice_weight: 0.5
+
+predict:
+  threshold: 0.5
+  min_region_size: 0
+
+augmentation:
+  enabled: true
+  hflip_prob: 0.5
+  vflip_prob: 0.5
+  rotate90: true
+  brightness: 0.10
+  contrast: 0.10
+  color: 0.05
+  haze: 0.03
+  noise_std: 0.01
